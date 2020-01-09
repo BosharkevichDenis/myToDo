@@ -1,44 +1,69 @@
-var fiat = {
-    make: "Fiat",
-   model: "500",
-  // Другие свойства и методы...
-  started: false,
-  fuel: 0,
-  start: function() {
-    if(this.fuel == 0) {
-      alert( "The car is on empty, fill up before starting!")
+// function onPageLoaded() {
+//   let input = document.querySelector("input[type='text']");
+//   let ul = document.querySelector("ul.todos");
+
+
+//   function createToDo() {
+//     let li = document.createElement('li');
+//     // li.setAttribute(class, value)
+//     li.innerHTML = input.value;
+//     ul.prepend(li); // вставить li в начало <ol>
+//   };
+
+//   let buttonSave = buttons.querySelector('.save'); 
+//   buttonSave.addEventListener("click", createToDo);
+
+//   input.addEventListener('keydown', function(event) {
+//     if (event.code == 'Enter') {
+//       createToDo();
+//     }
+//   });
+
+// };
+
+// function deleteAllTodo() {
+//   let buttonDelete = buttons.querySelector('.clear');   
+//   let ul = document.querySelector(".todo-text");
+
+//   buttonDelete.addEventListener("click", ul.remove);
+// }
+
+
+// window.onload = onPageLoaded;
+
+
+function onPageLoaded() {
+  let input = document.querySelector("input[type='text']");
+  let ul = document.querySelector("ul.todos");
+
+
+  function createToDo() {
+    let li = document.querySelector('li');
+    li = li.cloneNode(true);
+    li.textContent = input.innerHTML;
+    
+    
+   
+    ul.prepend(li); // вставить li в начало <ol>
+  };
+
+  let buttonSave = buttons.querySelector('.save'); 
+  buttonSave.addEventListener("click", createToDo);
+
+  input.addEventListener('keydown', function(event) {
+    if (event.code == 'Enter') {
+      createToDo();
     }
-    this.started = true;
-    },
-  stop: function() {
-    this.started = false;
-    },
-    drive: function() {
-      if (this.started) {
-      if (this.fuel > 0) {
-      alert(this.make + " " +
-      this.model + " goes zoom zoom!");
-      this.fuel = this.fuel - 1;
-      } else {
-         alert("Uh oh, out of fuel.");
-         this.stop();
-      }
-      } else {
-          alert("You need to start the engine first.");
-        }
-      },
-  addFuel: function(amount) {
-  this.fuel = this.fuel + amount;
-  }
- };
+  });
 
-fiat.start();
-fiat.drive();
-fiat.addFuel(2);
-fiat.start();
-fiat.drive();
-fiat.drive();
-fiat.drive();
-fiat.stop();
+};
 
-  
+function deleteAllTodo() {
+  let buttonDelete = buttons.querySelector('.clear');   
+  let ul = document.querySelector(".todo-text");
+
+  buttonDelete.addEventListener("click", ul.remove);
+}
+
+
+window.onload = onPageLoaded;

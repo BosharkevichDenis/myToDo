@@ -4,15 +4,19 @@ function onPageLoaded() {
  
   function createToDo() {
     let li = document.createElement("li");
+    let i = document.createElement("i");
     let newSpan = document.createElement("span");
-    let basket =  document.querySelector(".todo-trash");
-    basket = basket.cloneNode(true);
-    newSpan.setAttribute("class", "todo-text")
-    newSpan.innerHTML = input.value;
-    ul.prepend(li)
+    let secondSpan = document.createElement("span");
+    newSpan.setAttribute("class", "todo-text");
+    secondSpan.setAttribute("class", "todo-trash");
+    i.setAttribute("class", "fas fa-trash-alt");
+    ul.prepend(li);
     li.prepend(newSpan); 
-    li.append(basket);
-    
+    newSpan.innerHTML = input.value;
+    li.append(secondSpan); 
+    secondSpan.append(i); 
+    DeleteTodo(secondSpan);
+    getStrike(li);
   };
 
   let buttonSave = buttons.querySelector(".save"); 
@@ -26,23 +30,30 @@ function onPageLoaded() {
 
   function deleteAllTodo() {     
     let li =  document.querySelector("li");
-    li.parentNode.remove(li);
+    li.parentElement.remove(li);
     // li.parentNode.removeChild(li);  -  удаление по одному
   };
   
   let buttonDelete = buttons.querySelector(".clear");  
   buttonDelete.addEventListener("click", deleteAllTodo);
-  
+    
  
-  
+  // let buttonDeleteToDo = buttons.querySelector("span.todo-trash"); 
+  // DeleteTodo(buttonDeleteToDo);  - не надо
 
-  // function removeTodo() {
-  //   let li =  document.querySelector("li");
-  //   li.removeChild(li.lastChild);
-  // };
-  let clearBasket = document.querySelector(".todo-trash");  
-  // clearBasket.addEventListener("click", removeTodo);
-  
+  function DeleteTodo(element) {
+    element.addEventListener("click", (event) => {
+        element.parentElement.remove();
+        // event.stopPropagation();
+    });
+  }
+  function getStrike(element) {
+    element.addEventListener("click", (event) => {
+       element.setAttribute("style", "text-decoration:line-through;")
+        // event.stopPropagation();
+    });
+  }
+
  
 };
 

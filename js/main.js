@@ -1,53 +1,21 @@
-// function onPageLoaded() {
-//   let input = document.querySelector("input[type='text']");
-//   let ul = document.querySelector("ul.todos");
-
-
-//   function createToDo() {
-//     let li = document.createElement('li');
-//     // li.setAttribute(class, value)
-//     li.innerHTML = input.value;
-//     ul.prepend(li); // вставить li в начало <ol>
-//   };
-
-//   let buttonSave = buttons.querySelector('.save'); 
-//   buttonSave.addEventListener("click", createToDo);
-
-//   input.addEventListener('keydown', function(event) {
-//     if (event.code == 'Enter') {
-//       createToDo();
-//     }
-//   });
-
-// };
-
-// function deleteAllTodo() {
-//   let buttonDelete = buttons.querySelector('.clear');   
-//   let ul = document.querySelector(".todo-text");
-
-//   buttonDelete.addEventListener("click", ul.remove);
-// }
-
-
-// window.onload = onPageLoaded;
-
-
 function onPageLoaded() {
   let input = document.querySelector("input[type='text']");
   let ul = document.querySelector("ul.todos");
-
-
+ 
   function createToDo() {
-    let li = document.querySelector('li');
-    li = li.cloneNode(true);
-    li.textContent = input.innerHTML;
+    let li = document.createElement("li");
+    let newSpan = document.createElement("span");
+    let basket =  document.querySelector(".todo-trash");
+    basket = basket.cloneNode(true);
+    newSpan.setAttribute("class", "todo-text")
+    newSpan.innerHTML = input.value;
+    ul.prepend(li)
+    li.prepend(newSpan); 
+    li.append(basket);
     
-    
-   
-    ul.prepend(li); // вставить li в начало <ol>
   };
 
-  let buttonSave = buttons.querySelector('.save'); 
+  let buttonSave = buttons.querySelector(".save"); 
   buttonSave.addEventListener("click", createToDo);
 
   input.addEventListener('keydown', function(event) {
@@ -56,14 +24,32 @@ function onPageLoaded() {
     }
   });
 
+  function deleteAllTodo() {     
+    let li =  document.querySelector("li");
+    li.parentNode.remove(li);
+    // li.parentNode.removeChild(li);  -  удаление по одному
+  };
+  
+  let buttonDelete = buttons.querySelector(".clear");  
+  buttonDelete.addEventListener("click", deleteAllTodo);
+  
+ 
+  
+
+  // function removeTodo() {
+  //   let li =  document.querySelector("li");
+  //   li.removeChild(li.lastChild);
+  // };
+  let clearBasket = document.querySelector(".todo-trash");  
+  // clearBasket.addEventListener("click", removeTodo);
+  
+ 
 };
 
-function deleteAllTodo() {
-  let buttonDelete = buttons.querySelector('.clear');   
-  let ul = document.querySelector(".todo-text");
 
-  buttonDelete.addEventListener("click", ul.remove);
-}
+
+
+
 
 
 window.onload = onPageLoaded;
